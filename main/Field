@@ -1,60 +1,55 @@
-ArrayList<Integer> x_pos = new ArrayList<integer>();
-ArrayList<Integer> y_pos = new ArrayList<integer>();
-int hgt = 24, wdt = 24;
-int block = 20;      // size of the window
+if(!running) {
+            timer.stop();
+        }
+    }
+    public void gameOver(Graphics g) {
+        //Score
+        g.setColor(Color.red);
+        g.setFont( new Font("Ink Free",Font.BOLD, 40));
+        FontMetrics metrics1 = getFontMetrics(g.getFont());
+        g.drawString("Score: "+applesEaten, (SCREEN_WIDTH - metrics1.stringWidth("Score: "+applesEaten))/2, g.getFont().getSize());
+        //Game Over text
+        g.setColor(Color.red);
+        g.setFont( new Font("Ink Free",Font.BOLD, 75));
+        FontMetrics metrics2 = getFontMetrics(g.getFont());
+        g.drawString("Game Over", (SCREEN_WIDTH - metrics2.stringWidth("Game Over"))/2, SCREEN_HEIGHT/2);
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-void setup()
-{
-  size (500, 500);
-  x_pos.add(4);   // starting postition of the snake
-  y_pos.add(15);
-}
-
-void draw()
-{
-  background(0);
-  fill(225);
-  for (int i = 0; i < x_pos.size(); i++) {
-    rect(x_pos.get
-
-
-
-//второй вариант:
-
-
-import javax.swing.*;
-import java.awt.*;
-
-public class GameField extends JPanel {
-    private final int SIZE = 320;
-    private final int DOT_SIZE = 16;
-    private final int ALL_DOTS = 400;
-    private Image dot;
-    private Image apple;
-    private int appleX;
-    private int appleY;
-    private int[] x = new int[ALL_DOTS];
-    private int[] y = new int[ALL_DOTS];
-    private int dots;
-    private Timer timer;
-    private boolean left = false;
-    private boolean right = true;
-    private boolean up = false;
-    private boolean down = false;
-    private boolean inGame = true;
-
-
-    public GameField(){
-        setBackground(Color.black);
-        loadImages();
+        if(running) {
+            move();
+            checkApple();
+            checkCollisions();
+        }
+        repaint();
     }
 
-    public void loadImages(){
-        ImageIcon iia = new ImageIcon("apple.png");
-        apple = iia.getImage();
-        ImageIcon iid = new ImageIcon("dot.png");
-        dot = iid.getImage();
+    public class MyKeyAdapter extends KeyAdapter{
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch(e.getKeyCode()) {
+                case KeyEvent.VK_LEFT:
+                    if(direction != 'R') {
+                        direction = 'L';
+                    }
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    if(direction != 'L') {
+                        direction = 'R';
+                    }
+                    break;
+                case KeyEvent.VK_UP:
+                    if(direction != 'D') {
+                        direction = 'U';
+                    }
+                    break;
+                case KeyEvent.VK_DOWN:
+                    if(direction != 'U') {
+                        direction = 'D';
+                    }
+                    break;
+            }
+        }
     }
 }
-
-travis encrypt 87f1d59b3db58016c2971be309912ad2393dd40b
