@@ -1,3 +1,4 @@
+package com.company;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class GamePanel extends JPanel implements ActionListener{
     char direction = 'R';
     boolean running = false;
     Timer timer;
-    Random random;
+    final Random random;
 
     GamePanel(){
         random = new Random();
