@@ -1,5 +1,5 @@
 <coverage version="1">
   <file path="./src/com/company/Starter.java">
-    <lineToCover lineNumber="9" covered="true"/> 
+    <lineToCover lineNumber="1" covered="true"/> 
   </file>
 </coverage>
