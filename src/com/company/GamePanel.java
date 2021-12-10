@@ -4,24 +4,75 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
 
+/**
+ * The type Game panel.
+ */
 public class GamePanel extends JPanel implements ActionListener{
 
+    /**
+     * The Screen width.
+     */
     static final int SCREEN_WIDTH = 1300;
+    /**
+     * The Screen height.
+     */
     static final int SCREEN_HEIGHT = 750;
+    /**
+     * The Unit size.
+     */
     static final int UNIT_SIZE = 50;
+    /**
+     * The Game units.
+     */
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
+    /**
+     * The Delay.
+     */
     static final int DELAY = 175;
+    /**
+     * The X.
+     */
     final int x[] = new int[GAME_UNITS];
+    /**
+     * The Y.
+     */
     final int y[] = new int[GAME_UNITS];
+    /**
+     * The Body parts.
+     */
     int bodyParts = 6;
+    /**
+     * The Apples eaten.
+     */
     int applesEaten;
+    /**
+     * The Apple x.
+     */
     int appleX;
+    /**
+     * The Apple y.
+     */
     int appleY;
+    /**
+     * The Direction.
+     */
     char direction = 'R';
+    /**
+     * The Running.
+     */
     boolean running = false;
+    /**
+     * The Timer.
+     */
     Timer timer;
+    /**
+     * The Random.
+     */
     final Random random;
 
+    /**
+     * Instantiates a new Game panel.
+     */
     GamePanel(){
         random = new Random();
         this.setPreferredSize(new Dimension(SCREEN_WIDTH,SCREEN_HEIGHT));
@@ -30,6 +81,10 @@ public class GamePanel extends JPanel implements ActionListener{
         this.addKeyListener(new MyKeyAdapter());
         startGame();
     }
+
+    /**
+     * Start game.
+     */
     public void startGame() {
         newApple();
         running = true;
@@ -40,6 +95,12 @@ public class GamePanel extends JPanel implements ActionListener{
         super.paintComponent(g);
         draw(g);
     }
+
+    /**
+     * Draw.
+     *
+     * @param g the g
+     */
     public void draw(Graphics g) {
 
         if(running) {
@@ -67,10 +128,18 @@ public class GamePanel extends JPanel implements ActionListener{
         }
 
     }
+
+    /**
+     * New apple.
+     */
     public void newApple(){
         appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
         appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
     }
+
+    /**
+     * Move.
+     */
     public void move(){
         for(int i = bodyParts;i>0;i--) {
             x[i] = x[i-1];
@@ -93,6 +162,10 @@ public class GamePanel extends JPanel implements ActionListener{
         }
 
     }
+
+    /**
+     * Check apple.
+     */
     public void checkApple() {
         if((x[0] == appleX) && (y[0] == appleY)) {
             bodyParts++;
@@ -100,6 +173,10 @@ public class GamePanel extends JPanel implements ActionListener{
             newApple();
         }
     }
+
+    /**
+     * Check collisions.
+     */
     public void checkCollisions() {
         for(int i = bodyParts;i>0;i--) {
             if((x[0] == x[i])&& (y[0] == y[i])) {
@@ -127,6 +204,12 @@ public class GamePanel extends JPanel implements ActionListener{
             timer.stop();
         }
     }
+
+    /**
+     * Game over.
+     *
+     * @param g the g
+     */
     public void gameOver(Graphics g) {
         //Score
         g.setColor(Color.white);
@@ -150,6 +233,9 @@ public class GamePanel extends JPanel implements ActionListener{
         repaint();
     }
 
+    /**
+     * The type My key adapter.
+     */
     public class MyKeyAdapter extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {

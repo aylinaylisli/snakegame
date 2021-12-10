@@ -1,8 +1,14 @@
 package com.company;
 import javax.swing.JFrame;
 
+/**
+ * The type Game frame.
+ */
 public class GameFrame extends JFrame{
 
+    /**
+     * Instantiates a new Game frame.
+     */
     GameFrame(){
 
         this.add(new GamePanel());
